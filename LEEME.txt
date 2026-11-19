@@ -1,7 +1,5 @@
 INSTRUCCIONES RÁPIDAS:
 1. Extrae esta carpeta completa en tu computadora.
-2. Todas las imágenes extraídas de tu guion (personajes, fondos y portadas de libros) y la música de fondo ya están guardadas dentro de las carpetas "img/" y "audio/".
-3. Abre "index.html" en tu navegador para jugar.
-4. Nota sobre el video final (Error 153 de YouTube):
-   - Se corrigió el enlace usando youtube-nocookie.com y referrerpolicy="strict-origin-when-cross-origin".
-   - Ten en cuenta que si abres el HTML con doble clic desde Windows (protocolo file://), YouTube a veces muestra Error 153 por falta de dominio web; si lo subes a GitHub Pages o lo abres con Live Server en VS Code, el reproductor incrustado funciona sin problemas. De todos modos, agregamos un enlace directo debajo del reproductor por si lo pruebas en local.
+2. Todas las imágenes corresponden exactamente a las de "Guión (1).docx" y ya están guardadas en "img/".
+3. La música de fondo está en "audio/musica-fondo.mp3", suena de forma continua en todos los nodos y se detiene al entrar al final secreto del video.
+4. Abre "index.html" en tu navegador para jugar.
