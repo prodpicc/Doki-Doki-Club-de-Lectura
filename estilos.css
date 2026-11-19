@@ -28,10 +28,10 @@ body {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
     background-size: cover;
     background-position: center;
-    background-color: #ffeef5; /* Color de respaldo si no carga el fondo */
+    background-color: #ffeef5;
 }
 
-/* Fondos de las escenas (Reemplaza las rutas por tus imágenes) */
+/* Fondos de las escenas */
 .fondo-puerta {
     background-image: url('img/puerta.jpg');
 }
@@ -41,20 +41,19 @@ body {
 }
 
 .fondo-libro {
-    background-color: #d7c4b7; /* Fondo estilo mesa de madera */
+    background-color: #d7c4b7;
 }
 
 /* Personajes (Sprites) */
 .personaje {
     position: absolute;
-    bottom: 140px; /* Justo encima de la caja de diálogo */
+    bottom: 140px;
     left: 50%;
     transform: translateX(-50%);
     height: 430px;
     z-index: 1;
 }
 
-/* Si hay dos personajes en pantalla */
 .personaje-izq {
     left: 30%;
 }
@@ -105,6 +104,7 @@ body {
     gap: 12px;
     flex-wrap: wrap;
     justify-content: flex-end;
+    align-items: center;
 }
 
 .boton {
@@ -134,7 +134,7 @@ body {
     cursor: pointer;
 }
 
-/* Caja de texto para escribir (decorativa en HTML puro) */
+/* Caja de texto para escribir */
 .input-nombre {
     padding: 8px 12px;
     border: 2px solid #ff85b3;
@@ -142,6 +142,23 @@ body {
     font-family: 'Quicksand', sans-serif;
     font-size: 1rem;
     outline: none;
+    width: 260px;
+}
+
+/* --- MAGIA CSS PURA PARA DETECTAR "Monika" SIN JAVASCRIPT --- */
+/* Por defecto el enlace secreto está oculto y se ve el botón normal */
+.btn-secreto {
+    display: none;
+}
+
+/* Si el cuadro de texto es válido (es decir, coincide con pattern="[Mm][Oo][Nn][Ii][Kk][Aa]"),
+   ocultamos el botón normal y mostramos el botón secreto en su mismo lugar */
+.opciones:has(.input-secreto:valid) .btn-normal {
+    display: none;
+}
+
+.opciones:has(.input-secreto:valid) .btn-secreto {
+    display: inline-block;
 }
 
 /* Selección de libros */
@@ -189,7 +206,7 @@ body {
     border-radius: 10px;
     padding: 30px 45px;
     box-shadow: inset 0 0 30px rgba(0,0,0,0.1);
-    overflow-y: auto; /* Permite hacer scroll si el poema es largo */
+    overflow-y: auto;
     position: relative;
 }
 
@@ -197,7 +214,7 @@ body {
     font-family: 'Georgia', serif;
     font-size: 1.05rem;
     line-height: 1.6;
-    white-space: pre-line; /* Respeta los saltos de línea del poema */
+    white-space: pre-line;
     color: #2c2c2c;
 }
 
