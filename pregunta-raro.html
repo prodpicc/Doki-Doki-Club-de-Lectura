@@ -8,13 +8,8 @@
 <body>
 
     <div class="pantalla-juego">
-        <!-- FONDO DEL AULA -->
-        <iframe class="fondo-embed" src="https://savedly.net/embed/nv9dz5wv" allowfullscreen loading="lazy"></iframe>
-
-        <!-- SPRITE DE PHOEBE -->
-        <div class="sprite-contenedor">
-            <iframe class="sprite-embed" src="https://savedly.net/embed/sj7wrc2s" allowfullscreen loading="lazy"></iframe>
-        </div>
+        <img src="img/sala-lectura.jpg" alt="Sala de lectura" class="fondo-img">
+        <img src="img/phoebe.png" alt="Phoebe" class="personaje">
 
         <div class="caja-dialogo">
             <div class="nombre-personaje">¿Eh?</div>
@@ -25,7 +20,8 @@
             <div class="opciones">
                 <input type="text" class="input-nombre input-secreto" placeholder="Escribe tu razón..." required pattern="[Mm][Oo][Nn][Ii][Kk][Aa]">
                 <a href="final-normal.html" class="boton btn-normal">Enviar respuesta</a>
-                <a href="final-secreto.html" class="boton btn-secreto">Enviar respuesta</a>
+                <!-- target="_top" cierra el marco de música de fondo para que se pause solo en este final -->
+                <a href="final-secreto.html" target="_top" class="boton btn-secreto">Enviar respuesta</a>
             </div>
         </div>
     </div>

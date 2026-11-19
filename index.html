@@ -2,29 +2,20 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Club de Lectura - Inicio</title>
+    <title>Club de Lectura - Novela Visual</title>
     <link rel="stylesheet" href="estilos.css">
 </head>
-<body>
+<body class="marco-principal">
 
-    <div class="pantalla-juego">
-        <!-- FONDO DE LA PUERTA -->
-        <iframe class="fondo-embed" src="https://savedly.net/embed/d8vuegak" allowfullscreen loading="lazy"></iframe>
-
-        <!-- PUERTA CERRADA (Si quieres intercambiarla por la abierta, cambia ugs8wamb por rwjypt9n) -->
-        <div class="puerta-contenedor">
-            <iframe class="puerta-embed" src="https://savedly.net/embed/ugs8wamb" allowfullscreen loading="lazy"></iframe>
-            <a href="puerta-golpe.html" class="puerta-clicable" title="Haz clic para tocar la puerta"></a>
-        </div>
-
-        <div class="caja-dialogo">
-            <div class="nombre-personaje">Tú</div>
-            <p class="texto-dialogo">
-                Estás frente a la puerta de la sala de lectura de la biblioteca local. 
-                <em>(Haz clic en la puerta para tocar).</em>
-            </p>
-        </div>
+    <!-- Música de fondo continua para todos los nodos -->
+    <div class="control-musica">
+        <audio autoplay loop controls>
+            <source src="audio/musica-fondo.mp3" type="audio/mpeg">
+        </audio>
     </div>
+
+    <!-- Aquí se cargan todos los nodos sin interrumpir la música -->
+    <iframe src="inicio.html" name="pantalla" class="visor-juego"></iframe>
 
 </body>
 </html>

@@ -17,6 +17,21 @@ body {
     color: #4a3b42;
 }
 
+/* Marco contenedor en index.html para mantener la música continua sin JavaScript */
+body.marco-principal {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #2b1d26;
+}
+
+.visor-juego {
+    width: 100vw;
+    height: 100vh;
+    border: none;
+    display: block;
+}
+
 /* Contenedor principal tipo pantalla de juego (16:9) */
 .pantalla-juego {
     width: 960px;
@@ -29,41 +44,22 @@ body {
     background-color: #ffeef5;
 }
 
-/* --- FONDOS INCRUSTADOS (IFRAMES DE SAVEDLY / TENOR) --- */
-.fondo-embed {
+/* --- IMÁGENES DE FONDO LOCALES --- */
+.fondo-img {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    border: 0;
+    object-fit: cover;
     z-index: 0;
-    pointer-events: none; /* Evita que el iframe bloquee los clics del juego */
 }
 
 .fondo-libro {
     background-color: #d7c4b7;
 }
 
-/* --- PUERTAS (CERRADA Y ABIERTA) --- */
-.puerta-contenedor {
-    position: absolute;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 340px;
-    height: 440px;
-    z-index: 1;
-}
-
-.puerta-embed {
-    width: 100%;
-    height: 100%;
-    border: 0;
-    pointer-events: none;
-}
-
-/* Capa invisible sobre la puerta cerrada para poder hacer clic */
+/* Área clicable sobre la puerta */
 .puerta-clicable {
     position: absolute;
     top: 0;
@@ -74,30 +70,25 @@ body {
     cursor: pointer;
 }
 
-/* --- PERSONAJES / SPRITES INCRUSTADOS --- */
-.sprite-contenedor {
+/* --- PERSONAJES / SPRITES --- */
+.personaje {
     position: absolute;
-    bottom: 135px; /* Justo encima de la caja de diálogo */
+    bottom: 130px; /* Justo encima de la caja de diálogo */
     left: 50%;
     transform: translateX(-50%);
-    width: 320px;
-    height: 430px;
+    height: 440px;
+    width: auto;
     z-index: 2;
     pointer-events: none;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.35));
 }
 
-.sprite-izq {
+.personaje-izq {
     left: 28%;
 }
 
-.sprite-der {
+.personaje-der {
     left: 72%;
-}
-
-.sprite-embed {
-    width: 100%;
-    height: 100%;
-    border: 0;
 }
 
 /* --- CAJA DE DIÁLOGO ESTILO DOKI DOKI LITERATURE CLUB --- */
@@ -192,22 +183,23 @@ body {
 .estante-libros {
     display: flex;
     justify-content: center;
-    gap: 25px;
-    padding-top: 30px;
+    gap: 30px;
+    padding-top: 35px;
     z-index: 3;
     position: relative;
 }
 
 .libro-opcion {
     text-align: center;
-    background: rgba(255, 255, 255, 0.92);
-    padding: 10px;
+    background: rgba(255, 255, 255, 0.94);
+    padding: 12px;
     border-radius: 10px;
     border: 3px solid #ff85b3;
     text-decoration: none;
     color: #4a3b42;
     transition: transform 0.2s;
     width: 200px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
 
 .libro-opcion:hover {
@@ -215,14 +207,13 @@ body {
     background: #ffe0ed;
 }
 
-.libro-portada-embed {
-    width: 174px;
-    height: 220px;
-    border: 0;
-    border-radius: 5px;
+.libro-opcion img {
+    width: 150px;
+    height: 215px;
+    object-fit: cover;
+    border-radius: 6px;
     display: block;
     margin: 0 auto 8px auto;
-    pointer-events: none; /* Permite que el clic vaya al enlace <a> del libro */
 }
 
 /* --- PANTALLA DE LECTURA DEL POEMA (LIBRO ABIERTO) --- */
@@ -260,7 +251,7 @@ body {
     border-radius: 50%;
 }
 
-/* --- PANTALLA FINAL SECRETA (CON GIF DE TENOR DE FONDO) --- */
+/* --- PANTALLA FINAL SECRETA --- */
 .pantalla-glitch {
     background-color: #12040a;
     border-color: #ff0044;
@@ -272,6 +263,14 @@ body {
 .contenido-glitch {
     position: relative;
     z-index: 2;
+}
+
+.caja-video-fallback {
+    background: rgba(18, 4, 10, 0.88);
+    border: 2px solid #ff0044;
+    border-radius: 12px;
+    padding: 15px;
+    display: inline-block;
 }
 
 /* --- CRÉDITOS ESTILO DOKI DOKI LITERATURE CLUB --- */
@@ -337,4 +336,22 @@ body {
     color: #ffffff;
     font-weight: 500;
     text-shadow: 0 0 6px rgba(255, 183, 213, 0.6);
+}
+
+/* Barra discreta de control de audio arriba por si el navegador bloquea autoplay */
+.control-musica {
+    position: fixed;
+    top: 10px;
+    right: 15px;
+    z-index: 999;
+    opacity: 0.75;
+    transition: opacity 0.2s;
+}
+
+.control-musica:hover {
+    opacity: 1;
+}
+
+.control-musica audio {
+    height: 30px;
 }

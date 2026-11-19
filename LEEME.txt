@@ -1,5 +1,7 @@
 INSTRUCCIONES RÁPIDAS:
-1. Extrae esta carpeta en tu computadora.
-2. Todas las imágenes de fondos, puertas, personajes (sprites) y libros ya están conectadas en cada nodo mediante sus enlaces de Savedly y Tenor.
-3. (Opcional) Si quieres sonido al tocar la puerta, guarda un archivo llamado "golpes.mp3" dentro de la subcarpeta "audio".
-4. Haz doble clic en "index.html" para abrir y jugar en tu navegador (requiere conexión a internet para cargar los enlaces de Savedly/Tenor/YouTube).
+1. Extrae esta carpeta completa en tu computadora.
+2. Todas las imágenes extraídas de tu guion (personajes, fondos y portadas de libros) y la música de fondo ya están guardadas dentro de las carpetas "img/" y "audio/".
+3. Abre "index.html" en tu navegador para jugar.
+4. Nota sobre el video final (Error 153 de YouTube):
+   - Se corrigió el enlace usando youtube-nocookie.com y referrerpolicy="strict-origin-when-cross-origin".
+   - Ten en cuenta que si abres el HTML con doble clic desde Windows (protocolo file://), YouTube a veces muestra Error 153 por falta de dominio web; si lo subes a GitHub Pages o lo abres con Live Server en VS Code, el reproductor incrustado funciona sin problemas. De todos modos, agregamos un enlace directo debajo del reproductor por si lo pruebas en local.
