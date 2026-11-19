@@ -7,8 +7,14 @@
 </head>
 <body>
 
-    <div class="pantalla-juego fondo-sala">
-        <img src="img/phoebe.png" alt="Personaje" class="personaje">
+    <div class="pantalla-juego">
+        <!-- FONDO DEL AULA -->
+        <iframe class="fondo-embed" src="https://savedly.net/embed/nv9dz5wv" allowfullscreen loading="lazy"></iframe>
+
+        <!-- SPRITE DE PHOEBE -->
+        <div class="sprite-contenedor">
+            <iframe class="sprite-embed" src="https://savedly.net/embed/sj7wrc2s" allowfullscreen loading="lazy"></iframe>
+        </div>
 
         <div class="caja-dialogo">
             <div class="nombre-personaje">¿Eh?</div>
@@ -17,13 +23,8 @@
             </p>
             
             <div class="opciones">
-                <!-- El atributo pattern valida si el jugador escribió "Monika" (mayúsculas o minúsculas) sin usar JavaScript -->
                 <input type="text" class="input-nombre input-secreto" placeholder="Escribe tu razón..." required pattern="[Mm][Oo][Nn][Ii][Kk][Aa]">
-                
-                <!-- Si escribe cualquier otra cosa, este botón lleva al final normal -->
                 <a href="final-normal.html" class="boton btn-normal">Enviar respuesta</a>
-                
-                <!-- Si escribe "Monika", CSS intercambia automáticamente el botón para llevar al final secreto -->
                 <a href="final-secreto.html" class="boton btn-secreto">Enviar respuesta</a>
             </div>
         </div>

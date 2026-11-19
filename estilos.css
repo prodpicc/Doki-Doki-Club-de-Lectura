@@ -26,42 +26,81 @@ body {
     border: 6px solid #ffb7d5;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-    background-size: cover;
-    background-position: center;
     background-color: #ffeef5;
 }
 
-/* Fondos de las escenas */
-.fondo-puerta {
-    background-image: url('img/puerta.jpg');
-}
-
-.fondo-sala {
-    background-image: url('img/sala-lectura.jpg');
+/* --- FONDOS INCRUSTADOS (IFRAMES DE SAVEDLY / TENOR) --- */
+.fondo-embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    z-index: 0;
+    pointer-events: none; /* Evita que el iframe bloquee los clics del juego */
 }
 
 .fondo-libro {
     background-color: #d7c4b7;
 }
 
-/* Personajes (Sprites) */
-.personaje {
+/* --- PUERTAS (CERRADA Y ABIERTA) --- */
+.puerta-contenedor {
     position: absolute;
-    bottom: 140px;
+    top: 20px;
     left: 50%;
     transform: translateX(-50%);
-    height: 430px;
+    width: 340px;
+    height: 440px;
     z-index: 1;
 }
 
-.personaje-izq {
-    left: 30%;
-}
-.personaje-der {
-    left: 70%;
+.puerta-embed {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    pointer-events: none;
 }
 
-/* Caja de diálogo estilo Doki Doki Literature Club */
+/* Capa invisible sobre la puerta cerrada para poder hacer clic */
+.puerta-clicable {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    cursor: pointer;
+}
+
+/* --- PERSONAJES / SPRITES INCRUSTADOS --- */
+.sprite-contenedor {
+    position: absolute;
+    bottom: 135px; /* Justo encima de la caja de diálogo */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 320px;
+    height: 430px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.sprite-izq {
+    left: 28%;
+}
+
+.sprite-der {
+    left: 72%;
+}
+
+.sprite-embed {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* --- CAJA DE DIÁLOGO ESTILO DOKI DOKI LITERATURE CLUB --- */
 .caja-dialogo {
     position: absolute;
     bottom: 20px;
@@ -73,11 +112,10 @@ body {
     border: 4px solid #ff85b3;
     border-radius: 12px;
     padding: 25px 30px 20px 30px;
-    z-index: 2;
+    z-index: 4;
     box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
 }
 
-/* Etiqueta con el nombre del personaje */
 .nombre-personaje {
     position: absolute;
     top: -22px;
@@ -126,14 +164,6 @@ body {
     transform: scale(1.03);
 }
 
-/* Área clicable invisible para la puerta */
-.puerta-clicable {
-    display: block;
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-}
-
 /* Caja de texto para escribir */
 .input-nombre {
     padding: 8px 12px;
@@ -146,13 +176,10 @@ body {
 }
 
 /* --- MAGIA CSS PURA PARA DETECTAR "Monika" SIN JAVASCRIPT --- */
-/* Por defecto el enlace secreto está oculto y se ve el botón normal */
 .btn-secreto {
     display: none;
 }
 
-/* Si el cuadro de texto es válido (es decir, coincide con pattern="[Mm][Oo][Nn][Ii][Kk][Aa]"),
-   ocultamos el botón normal y mostramos el botón secreto en su mismo lugar */
 .opciones:has(.input-secreto:valid) .btn-normal {
     display: none;
 }
@@ -161,25 +188,26 @@ body {
     display: inline-block;
 }
 
-/* Selección de libros */
+/* --- SELECCIÓN DE LIBROS --- */
 .estante-libros {
     display: flex;
     justify-content: center;
-    gap: 30px;
-    padding-top: 40px;
-    z-index: 2;
+    gap: 25px;
+    padding-top: 30px;
+    z-index: 3;
     position: relative;
 }
 
 .libro-opcion {
     text-align: center;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.92);
     padding: 10px;
     border-radius: 10px;
     border: 3px solid #ff85b3;
     text-decoration: none;
     color: #4a3b42;
     transition: transform 0.2s;
+    width: 200px;
 }
 
 .libro-opcion:hover {
@@ -187,16 +215,17 @@ body {
     background: #ffe0ed;
 }
 
-.libro-opcion img {
-    width: 150px;
-    height: 210px;
-    object-fit: cover;
+.libro-portada-embed {
+    width: 174px;
+    height: 220px;
+    border: 0;
     border-radius: 5px;
     display: block;
-    margin-bottom: 8px;
+    margin: 0 auto 8px auto;
+    pointer-events: none; /* Permite que el clic vaya al enlace <a> del libro */
 }
 
-/* Pantalla de lectura del poema (Libro abierto) */
+/* --- PANTALLA DE LECTURA DEL POEMA (LIBRO ABIERTO) --- */
 .hoja-libro {
     width: 820px;
     height: 520px;
@@ -208,6 +237,7 @@ body {
     box-shadow: inset 0 0 30px rgba(0,0,0,0.1);
     overflow-y: auto;
     position: relative;
+    z-index: 2;
 }
 
 .poema-texto {
@@ -230,11 +260,81 @@ body {
     border-radius: 50%;
 }
 
-/* Pantalla final de terror / glitch */
+/* --- PANTALLA FINAL SECRETA (CON GIF DE TENOR DE FONDO) --- */
 .pantalla-glitch {
     background-color: #12040a;
     border-color: #ff0044;
     color: white;
     text-align: center;
     padding: 20px;
+}
+
+.contenido-glitch {
+    position: relative;
+    z-index: 2;
+}
+
+/* --- CRÉDITOS ESTILO DOKI DOKI LITERATURE CLUB --- */
+.pantalla-creditos {
+    background-color: #0d0d0d;
+    border-color: #ffb7d5;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.contenedor-scroll-creditos {
+    width: 100%;
+    height: 460px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.lista-creditos {
+    position: absolute;
+    width: 85%;
+    animation: subirCreditos 16s linear forwards;
+}
+
+@keyframes subirCreditos {
+    0% {
+        top: 100%;
+    }
+    100% {
+        top: 40px;
+    }
+}
+
+.titulo-creditos {
+    font-size: 2.2rem;
+    color: #ffffff;
+    text-shadow: 0 0 10px #ff69b4, 2px 2px 0px #ff69b4;
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+}
+
+.bloque-credito {
+    margin-bottom: 18px;
+}
+
+.rol-credito {
+    display: block;
+    font-size: 1rem;
+    color: #ffb7d5;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.nombre-credito {
+    display: block;
+    font-size: 1.45rem;
+    color: #ffffff;
+    font-weight: 500;
+    text-shadow: 0 0 6px rgba(255, 183, 213, 0.6);
 }
