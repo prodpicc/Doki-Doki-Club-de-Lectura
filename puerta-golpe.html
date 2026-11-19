@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Club de Lectura - La Puerta</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+    <!-- Sonido opcional al cargar la escena -->
+    <audio autoplay>
+        <source src="audio/golpes.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="pantalla-juego fondo-puerta">
+        <!-- Sprite de Phoebe -->
+        <img src="img/phoebe.png" alt="Phoebe" class="personaje">
+
+        <div class="caja-dialogo">
+            <div class="nombre-personaje">Phoebe</div>
+            <p class="texto-dialogo">
+                ¡Buenos días! ¿Venís al club de lectura? ¡Bienvenida! ¿Cómo te llamás?
+            </p>
+            
+            <div class="opciones">
+                <input type="text" class="input-nombre" placeholder="Escribe tu nombre aquí...">
+                <a href="sala-intro.html" class="boton">¡Sí! Pasar a la sala →</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

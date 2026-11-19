@@ -1,0 +1,223 @@
+/* Importamos una fuente redondeada estilo novela visual */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    background-color: #2b1d26;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #4a3b42;
+}
+
+/* Contenedor principal tipo pantalla de juego (16:9) */
+.pantalla-juego {
+    width: 960px;
+    height: 600px;
+    position: relative;
+    overflow: hidden;
+    border: 6px solid #ffb7d5;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    background-size: cover;
+    background-position: center;
+    background-color: #ffeef5; /* Color de respaldo si no carga el fondo */
+}
+
+/* Fondos de las escenas (Reemplaza las rutas por tus imágenes) */
+.fondo-puerta {
+    background-image: url('img/puerta.jpg');
+}
+
+.fondo-sala {
+    background-image: url('img/sala-lectura.jpg');
+}
+
+.fondo-libro {
+    background-color: #d7c4b7; /* Fondo estilo mesa de madera */
+}
+
+/* Personajes (Sprites) */
+.personaje {
+    position: absolute;
+    bottom: 140px; /* Justo encima de la caja de diálogo */
+    left: 50%;
+    transform: translateX(-50%);
+    height: 430px;
+    z-index: 1;
+}
+
+/* Si hay dos personajes en pantalla */
+.personaje-izq {
+    left: 30%;
+}
+.personaje-der {
+    left: 70%;
+}
+
+/* Caja de diálogo estilo Doki Doki Literature Club */
+.caja-dialogo {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    min-height: 150px;
+    background-color: rgba(255, 240, 246, 0.95);
+    border: 4px solid #ff85b3;
+    border-radius: 12px;
+    padding: 25px 30px 20px 30px;
+    z-index: 2;
+    box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+}
+
+/* Etiqueta con el nombre del personaje */
+.nombre-personaje {
+    position: absolute;
+    top: -22px;
+    left: 25px;
+    background-color: #ff69b4;
+    color: white;
+    font-weight: 700;
+    font-size: 1.2rem;
+    padding: 4px 20px;
+    border-radius: 20px;
+    border: 3px solid #ffffff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.texto-dialogo {
+    font-size: 1.15rem;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+/* Botones de opciones y navegación */
+.opciones {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.boton {
+    display: inline-block;
+    text-decoration: none;
+    background-color: #ffe0ed;
+    color: #b03060;
+    font-weight: 700;
+    padding: 8px 18px;
+    border: 2px solid #ff85b3;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.boton:hover {
+    background-color: #ff69b4;
+    color: white;
+    transform: scale(1.03);
+}
+
+/* Área clicable invisible para la puerta */
+.puerta-clicable {
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+/* Caja de texto para escribir (decorativa en HTML puro) */
+.input-nombre {
+    padding: 8px 12px;
+    border: 2px solid #ff85b3;
+    border-radius: 8px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1rem;
+    outline: none;
+}
+
+/* Selección de libros */
+.estante-libros {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding-top: 40px;
+    z-index: 2;
+    position: relative;
+}
+
+.libro-opcion {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    border-radius: 10px;
+    border: 3px solid #ff85b3;
+    text-decoration: none;
+    color: #4a3b42;
+    transition: transform 0.2s;
+}
+
+.libro-opcion:hover {
+    transform: translateY(-10px);
+    background: #ffe0ed;
+}
+
+.libro-opcion img {
+    width: 150px;
+    height: 210px;
+    object-fit: cover;
+    border-radius: 5px;
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* Pantalla de lectura del poema (Libro abierto) */
+.hoja-libro {
+    width: 820px;
+    height: 520px;
+    margin: 35px auto;
+    background-color: #fdfbf7;
+    border: 3px solid #c2b2a3;
+    border-radius: 10px;
+    padding: 30px 45px;
+    box-shadow: inset 0 0 30px rgba(0,0,0,0.1);
+    overflow-y: auto; /* Permite hacer scroll si el poema es largo */
+    position: relative;
+}
+
+.poema-texto {
+    font-family: 'Georgia', serif;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    white-space: pre-line; /* Respeta los saltos de línea del poema */
+    color: #2c2c2c;
+}
+
+/* El código Base64 con mancha de café */
+.codigo-oculto {
+    display: inline-block;
+    margin-top: 15px;
+    font-family: monospace;
+    font-weight: bold;
+    color: #3b2314;
+    background: radial-gradient(circle, rgba(111,78,55,0.45) 20%, rgba(111,78,55,0.15) 65%, transparent 75%);
+    padding: 8px 14px;
+    border-radius: 50%;
+}
+
+/* Pantalla final de terror / glitch */
+.pantalla-glitch {
+    background-color: #12040a;
+    border-color: #ff0044;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}

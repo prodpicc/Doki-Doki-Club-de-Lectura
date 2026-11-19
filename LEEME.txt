@@ -1,0 +1,13 @@
+INSTRUCCIONES RÁPIDAS:
+1. Extrae esta carpeta en tu computadora.
+2. Guarda tus imágenes dentro de la subcarpeta "img" con estos nombres exactos:
+   - phoebe.png
+   - nina.png
+   - rei.png
+   - puerta.jpg
+   - sala-lectura.jpg
+   - libro-mapache.jpg
+   - libro-arachne.jpg
+   - libro-diablo.jpg
+3. (Opcional) Guarda el sonido de golpes en la puerta dentro de la subcarpeta "audio" con el nombre "golpes.mp3".
+4. Haz doble clic en "index.html" para abrir y probar el juego en tu navegador.
