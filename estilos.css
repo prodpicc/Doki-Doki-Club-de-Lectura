@@ -317,9 +317,10 @@ body.marco-principal {
     font-size: 0.85rem;
     font-weight: bold;
     color: #3b2314;
-    background: radial-gradient(circle, rgba(111,78,55,0.45) 20%, rgba(111,78,55,0.15) 65%, transparent 75%);
+    background: radial-gradient(circle, rgba(111,78,55,0.35) 20%, rgba(111,78,55,0.1) 65%, transparent 75%);
     padding: 6px 12px;
     border-radius: 50%;
+    opacity: 0.18;
 }
 
 .boton-libro-listo {

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>M̵o̵n̵i̵k̵a̵</title>
+    <link rel="stylesheet" href="estilos.css">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000000;
+            overflow: hidden;
+        }
+        body.marco-principal,
+        body {
+            background-color: #000000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .pantalla-monika-oscura {
+            width: 960px;
+            height: 600px;
+            position: relative;
+            overflow: hidden;
+            background-color: #000000;
+            border: 2px solid #1a0006;
+            border-radius: 15px;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.95);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .video-tetrica-contenedor {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background-color: #000000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .video-sin-pausa {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background-color: #000000;
+            pointer-events: none;
+            user-select: none;
+        }
+        .velo-tetrico {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(0,0,0,0) 45%, rgba(0,0,0,0.82) 100%),
+                        repeating-linear-gradient(
+                            to bottom,
+                            rgba(255, 0, 40, 0.03) 0px,
+                            rgba(255, 0, 40, 0.03) 2px,
+                            rgba(0, 0, 0, 0.22) 2px,
+                            rgba(0, 0, 0, 0.22) 4px
+                        );
+            pointer-events: none;
+            z-index: 2;
+        }
+        .btn-continuar-tetrico {
+            position: absolute;
+            bottom: 16px;
+            right: 20px;
+            z-index: 5;
+            background-color: rgba(15, 0, 4, 0.85);
+            color: #ff2a55;
+            border: 1px solid #5c0014;
+            font-weight: 700;
+            text-decoration: none;
+            padding: 7px 15px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+        }
+        .btn-continuar-tetrico:hover {
+            background-color: #3a000d;
+            color: #ffffff;
+            border-color: #ff2a55;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="pantalla-monika-oscura">
+        <div class="video-tetrica-contenedor">
+            <video id="video-monika" class="video-sin-pausa" autoplay playsinline loop disablepicturepicture controlslist="nodownload nofullscreen noremoteplayback">
+                <source src="video/monika-alerta.mov" type="video/quicktime">
+                <source src="video/monika-alerta.mp4" type="video/mp4">
+            </video>
+            <div class="velo-tetrico"></div>
+        </div>
+        <a href="creditos.html" class="btn-continuar-tetrico">Continuar →</a>
+    </div>
+
+    <script>
+        (function () {
+            // Pausar música de fondo del club de lectura
+            try {
+                if (window.parent && window.parent.document) {
+                    const bgm = window.parent.document.getElementById("musica-fondo");
+                    if (bgm) bgm.pause();
+                }
+            } catch (e) {}
+
+            const video = document.getElementById("video-monika");
+            if (video) {
+                // Asegurar que no tenga controles y que intente reproducirse automáticamente
+                video.removeAttribute("controls");
+                video.controls = false;
+
+                function forzarReproduccion() {
+                    if (video.paused) {
+                        video.play().catch(function () {
+                            // Si el navegador bloquea autoplay con audio, intentar muteado y luego activar sonido al interactuar
+                            video.muted = true;
+                            video.play().catch(function () {});
+                        });
+                    }
+                }
+
+                // Evitar pausas manuales o mediante teclado
+                video.addEventListener("pause", function () {
+                    forzarReproduccion();
+                });
+
+                document.addEventListener("keydown", function (e) {
+                    if (e.code === "Space" || e.key === " ") {
+                        e.preventDefault();
+                        forzarReproduccion();
+                    }
+                });
+
+                // Desmutear automáticamente ante el primer clic o toque si tuvo que iniciar muteado
+                ["click", "pointerdown", "touchstart"].forEach(function (evt) {
+                    document.addEventListener(evt, function () {
+                        video.muted = false;
+                        forzarReproduccion();
+                    });
+                });
+
+                forzarReproduccion();
+            }
+        })();
+    </script>
+
+</body>
+</html>

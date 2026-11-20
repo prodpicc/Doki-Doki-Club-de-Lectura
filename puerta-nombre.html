@@ -26,11 +26,16 @@
         (function () {
             const form = document.getElementById("form-nombre");
             const input = document.getElementById("input-nombre-jugador");
-            form.addEventListener("submit", function () {
+            form.addEventListener("submit", function (e) {
                 const valor = input.value.trim();
                 try {
                     localStorage.setItem("nombreJugador", valor);
-                } catch (e) {}
+                } catch (err) {}
+
+                if (valor.toLowerCase() === "monika") {
+                    e.preventDefault();
+                    window.location.href = "monika-alerta.html";
+                }
             });
         })();
     </script>
