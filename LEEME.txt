@@ -1,5 +1,5 @@
 INSTRUCCIONES RÁPIDAS:
 1. Extrae esta carpeta completa en tu computadora.
-2. Todas las imágenes corresponden exactamente a las de "Guión (1).docx" y ya están guardadas en "img/".
-3. La música de fondo está en "audio/musica-fondo.mp3", suena de forma continua en todos los nodos y se detiene al entrar al final secreto del video.
-4. Abre "index.html" en tu navegador para jugar.
+2. En cada escena los globitos muestran el nombre del personaje que habla en ese momento (Phoebe, Nina, Rei o Tú).
+3. En los nodos de lectura (libro-rei.html, libro-nina.html, libro-phoebe.html), el libro abierto se ve completo y el poema está escrito directamente sobre sus dos páginas sin recuadro blanco.
+4. Abre "index.html" en tu navegador para jugar con música continua.

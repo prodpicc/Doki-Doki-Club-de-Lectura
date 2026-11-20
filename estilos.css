@@ -55,10 +55,6 @@ body.marco-principal {
     z-index: 0;
 }
 
-.fondo-libro {
-    background-color: #d7c4b7;
-}
-
 /* --- PUERTAS (CERRADA Y ABIERTA) --- */
 .puerta-img {
     position: absolute;
@@ -234,39 +230,92 @@ body.marco-principal {
     margin: 0 auto 8px auto;
 }
 
-/* --- PANTALLA DE LECTURA DEL POEMA (LIBRO ABIERTO) --- */
-.hoja-libro {
-    width: 820px;
-    height: 520px;
-    margin: 35px auto;
-    background-color: rgba(253, 251, 247, 0.92);
-    border: 3px solid #c2b2a3;
-    border-radius: 10px;
-    padding: 30px 45px;
-    box-shadow: inset 0 0 30px rgba(0,0,0,0.1);
-    overflow-y: auto;
+/* --- PANTALLA DE LECTURA DEL POEMA (LIBRO ABIERTO SIN CUADRO BLANCO) --- */
+.pantalla-lectura {
+    background-color: #3d2c24; /* Mesa oscura detrás del libro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Contenedor que mantiene la proporción exacta (2048x1591) de libro-abierto.png más chica */
+.libro-escena {
+    position: relative;
+    width: 720px;
+    height: 559px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.libro-abierto-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    z-index: 1;
+    pointer-events: none;
+    filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.65));
+}
+
+/* Dos columnas transparentes apoyadas directamente sobre las hojas izquierda y derecha del libro */
+.paginas-libro {
     position: relative;
     z-index: 2;
+    width: 85%;
+    height: 85%;
+    display: flex;
+    justify-content: space-between;
+    gap: 34px;
+    background: transparent;
+}
+
+.pagina-izq,
+.pagina-der {
+    width: 48%;
+    height: 100%;
+    padding: 8px 6px;
+    overflow-y: auto;
+    background: transparent;
+}
+
+.pagina-izq h2 {
+    font-family: 'Georgia', serif;
+    font-size: 1.15rem;
+    color: #3b2a22;
+    margin-bottom: 8px;
+    border-bottom: 1px solid rgba(90, 65, 50, 0.35);
+    padding-bottom: 3px;
 }
 
 .poema-texto {
     font-family: 'Georgia', serif;
-    font-size: 1.05rem;
-    line-height: 1.6;
+    font-size: 0.77rem;
+    line-height: 1.38;
     white-space: pre-line;
-    color: #2c2c2c;
+    color: #2c221d;
 }
 
-/* El código Base64 con mancha de café */
+/* El código Base64 con mancha de café directamente sobre la hoja derecha */
 .codigo-oculto {
     display: inline-block;
-    margin-top: 15px;
+    margin-top: 10px;
     font-family: monospace;
+    font-size: 0.85rem;
     font-weight: bold;
     color: #3b2314;
     background: radial-gradient(circle, rgba(111,78,55,0.45) 20%, rgba(111,78,55,0.15) 65%, transparent 75%);
-    padding: 8px 14px;
+    padding: 6px 12px;
     border-radius: 50%;
+}
+
+.boton-libro-listo {
+    position: absolute;
+    bottom: 14px;
+    right: 22px;
+    z-index: 5;
 }
 
 /* --- PANTALLA FINAL SECRETA --- */
