@@ -93,9 +93,12 @@
 
     <div class="pantalla-monika-oscura">
         <div class="video-tetrica-contenedor">
-            <video id="video-monika" class="video-sin-pausa" autoplay muted playsinline loop disablepicturepicture controlslist="nodownload nofullscreen noremoteplayback">
+            <video id="video-monika" class="video-sin-pausa" autoplay playsinline loop disablepicturepicture controlslist="nodownload nofullscreen noremoteplayback">
                 <source src="video/monika-alerta.webm" type="video/webm">
             </video>
+            <audio id="audio-video-monika" autoplay loop preload="auto">
+                <source src="video/monika-alerta.aac" type="audio/aac">
+            </audio>
             <div class="velo-tetrico"></div>
         </div>
         <a href="creditos.html" id="btn-salir-monika" class="btn-continuar-tetrico">Continuar →</a>
@@ -123,17 +126,41 @@
             const vigilanteBgm = setInterval(silenciarMusicaFondo, 150);
 
             const video = document.getElementById("video-monika");
+            const audioVideo = document.getElementById("audio-video-monika");
 
             if (video) {
                 video.removeAttribute("controls");
+                video.removeAttribute("muted");
                 video.controls = false;
+                video.muted = false;
+                video.volume = 1.0;
                 video.loop = true;
+            }
+
+            if (audioVideo) {
+                audioVideo.muted = false;
+                audioVideo.volume = 1.0;
+                audioVideo.loop = true;
             }
 
             function forzarReproduccion() {
                 silenciarMusicaFondo();
-                if (video && video.paused) {
-                    video.play().catch(function () {});
+                if (video) {
+                    video.muted = false;
+                    video.volume = 1.0;
+                    if (video.paused) {
+                        video.play().catch(function () {
+                            video.muted = true;
+                            video.play().catch(function () {});
+                        });
+                    }
+                }
+                if (audioVideo) {
+                    audioVideo.muted = false;
+                    audioVideo.volume = 1.0;
+                    if (audioVideo.paused) {
+                        audioVideo.play().catch(function () {});
+                    }
                 }
             }
 
@@ -141,6 +168,17 @@
                 video.addEventListener("pause", forzarReproduccion);
                 video.addEventListener("ended", function () {
                     video.currentTime = 0;
+                    if (audioVideo) {
+                        audioVideo.currentTime = 0;
+                    }
+                    forzarReproduccion();
+                });
+            }
+
+            if (audioVideo) {
+                audioVideo.addEventListener("pause", forzarReproduccion);
+                audioVideo.addEventListener("ended", function () {
+                    audioVideo.currentTime = 0;
                     forzarReproduccion();
                 });
             }
