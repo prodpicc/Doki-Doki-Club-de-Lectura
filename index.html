@@ -17,12 +17,52 @@
         (function () {
             const audio = document.getElementById("musica-fondo");
             const iframe = document.getElementById("visor-juego");
+            window.musicaBloqueada = false;
+
+            function esPantallaSinMusica() {
+                if (window.musicaBloqueada) return true;
+                try {
+                    const href = iframe.contentWindow.location.href || "";
+                    if (href.indexOf("monika-alerta.html") !== -1 || href.indexOf("final-secreto.html") !== -1) {
+                        return true;
+                    }
+                } catch (e) {}
+                return false;
+            }
 
             function iniciarMusica() {
-                if (audio && audio.paused) {
+                if (!audio) return;
+                if (esPantallaSinMusica()) {
+                    audio.pause();
+                    audio.muted = true;
+                    return;
+                }
+                audio.muted = false;
+                if (audio.paused) {
                     audio.play().catch(function () {});
                 }
             }
+
+            window.detenerMusicaFondo = function () {
+                window.musicaBloqueada = true;
+                if (audio) {
+                    audio.pause();
+                    audio.muted = true;
+                }
+            };
+
+            window.reanudarMusicaFondo = function () {
+                window.musicaBloqueada = false;
+                iniciarMusica();
+            };
+
+            window.addEventListener("message", function (event) {
+                if (event.data === "DETENER_MUSICA") {
+                    window.detenerMusicaFondo();
+                } else if (event.data === "REANUDAR_MUSICA") {
+                    window.reanudarMusicaFondo();
+                }
+            });
 
             // Intentar reproducir apenas carga la página
             window.addEventListener("DOMContentLoaded", iniciarMusica);

@@ -93,63 +93,85 @@
 
     <div class="pantalla-monika-oscura">
         <div class="video-tetrica-contenedor">
-            <video id="video-monika" class="video-sin-pausa" autoplay playsinline loop disablepicturepicture controlslist="nodownload nofullscreen noremoteplayback">
-                <source src="video/monika-alerta.mov" type="video/quicktime">
-                <source src="video/monika-alerta.mp4" type="video/mp4">
+            <video id="video-monika" class="video-sin-pausa" autoplay muted playsinline loop disablepicturepicture controlslist="nodownload nofullscreen noremoteplayback">
+                <source src="video/monika-alerta.webm" type="video/webm">
             </video>
             <div class="velo-tetrico"></div>
         </div>
-        <a href="creditos.html" class="btn-continuar-tetrico">Continuar →</a>
+        <a href="creditos.html" id="btn-salir-monika" class="btn-continuar-tetrico">Continuar →</a>
     </div>
 
     <script>
         (function () {
-            // Pausar música de fondo del club de lectura
-            try {
-                if (window.parent && window.parent.document) {
-                    const bgm = window.parent.document.getElementById("musica-fondo");
-                    if (bgm) bgm.pause();
-                }
-            } catch (e) {}
+            function silenciarMusicaFondo() {
+                try {
+                    if (window.parent) {
+                        if (typeof window.parent.detenerMusicaFondo === "function") {
+                            window.parent.detenerMusicaFondo();
+                        }
+                        window.parent.postMessage("DETENER_MUSICA", "*");
+                        const bgm = window.parent.document.getElementById("musica-fondo");
+                        if (bgm) {
+                            bgm.pause();
+                            bgm.muted = true;
+                        }
+                    }
+                } catch (e) {}
+            }
+
+            silenciarMusicaFondo();
+            const vigilanteBgm = setInterval(silenciarMusicaFondo, 150);
 
             const video = document.getElementById("video-monika");
+
             if (video) {
-                // Asegurar que no tenga controles y que intente reproducirse automáticamente
                 video.removeAttribute("controls");
                 video.controls = false;
+                video.loop = true;
+            }
 
-                function forzarReproduccion() {
-                    if (video.paused) {
-                        video.play().catch(function () {
-                            // Si el navegador bloquea autoplay con audio, intentar muteado y luego activar sonido al interactuar
-                            video.muted = true;
-                            video.play().catch(function () {});
-                        });
-                    }
+            function forzarReproduccion() {
+                silenciarMusicaFondo();
+                if (video && video.paused) {
+                    video.play().catch(function () {});
                 }
+            }
 
-                // Evitar pausas manuales o mediante teclado
-                video.addEventListener("pause", function () {
+            if (video) {
+                video.addEventListener("pause", forzarReproduccion);
+                video.addEventListener("ended", function () {
+                    video.currentTime = 0;
                     forzarReproduccion();
                 });
-
-                document.addEventListener("keydown", function (e) {
-                    if (e.code === "Space" || e.key === " ") {
-                        e.preventDefault();
-                        forzarReproduccion();
-                    }
-                });
-
-                // Desmutear automáticamente ante el primer clic o toque si tuvo que iniciar muteado
-                ["click", "pointerdown", "touchstart"].forEach(function (evt) {
-                    document.addEventListener(evt, function () {
-                        video.muted = false;
-                        forzarReproduccion();
-                    });
-                });
-
-                forzarReproduccion();
             }
+
+            document.addEventListener("keydown", function (e) {
+                if (e.code === "Space" || e.key === " ") {
+                    e.preventDefault();
+                    forzarReproduccion();
+                }
+            });
+
+            ["click", "pointerdown", "touchstart"].forEach(function (evt) {
+                document.addEventListener(evt, forzarReproduccion);
+            });
+
+            const btnSalir = document.getElementById("btn-salir-monika");
+            if (btnSalir) {
+                btnSalir.addEventListener("click", function () {
+                    clearInterval(vigilanteBgm);
+                    try {
+                        if (window.parent) {
+                            if (typeof window.parent.reanudarMusicaFondo === "function") {
+                                window.parent.reanudarMusicaFondo();
+                            }
+                            window.parent.postMessage("REANUDAR_MUSICA", "*");
+                        }
+                    } catch (e) {}
+                });
+            }
+
+            forzarReproduccion();
         })();
     </script>
 

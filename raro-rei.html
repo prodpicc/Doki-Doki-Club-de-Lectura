@@ -14,13 +14,41 @@
         <div class="caja-dialogo">
             <div class="nombre-personaje">Rei</div>
             <p class="texto-dialogo">¿Eh? ¿Por qué?</p>
-            <div class="opciones">
-                <input type="text" class="input-nombre input-secreto" placeholder="………." required pattern="[Mm][Oo][Nn][Ii][Kk][Aa]">
-                <a href="despedida-raro-rei.html" class="boton btn-normal">Continuar →</a>
-                <a href="final-secreto.html" target="_top" class="boton btn-monika">Continuar →</a>
-            </div>
+            <form class="opciones" id="form-raro-rei">
+                <input type="text" id="input-raro-rei" class="input-nombre" placeholder="……….">
+                <button type="submit" class="boton">Continuar →</button>
+            </form>
         </div>
     </div>
+
+    <script>
+        (function () {
+            const form = document.getElementById("form-raro-rei");
+            const input = document.getElementById("input-raro-rei");
+            form.addEventListener("submit", function (e) {
+                e.preventDefault();
+                const texto = (input.value || "").trim().toLowerCase();
+                if (texto === "alessa") {
+                    try {
+                        if (window.parent) {
+                            if (typeof window.parent.detenerMusicaFondo === "function") {
+                                window.parent.detenerMusicaFondo();
+                            }
+                            window.parent.postMessage("DETENER_MUSICA", "*");
+                            const bgm = window.parent.document.getElementById("musica-fondo");
+                            if (bgm) {
+                                bgm.pause();
+                                bgm.muted = true;
+                            }
+                        }
+                    } catch (err) {}
+                    window.location.href = "monika-alerta.html";
+                } else {
+                    window.location.href = "despedida-raro-rei.html";
+                }
+            });
+        })();
+    </script>
 
 </body>
 </html>
