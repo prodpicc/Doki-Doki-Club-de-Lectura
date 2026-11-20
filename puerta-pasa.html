@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Club de Lectura</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+    <div class="pantalla-juego">
+        <img src="img/pasillo.jpg" alt="Pasillo frente a la sala de lectura" class="fondo-img">
+        <img src="img/puerta-abierta.png" alt="Puerta abierta" class="puerta-img">
+        <img src="img/phoebe.png" alt="Phoebe" class="personaje personaje-puerta">
+
+        <div class="caja-dialogo">
+            <div class="nombre-personaje">Phoebe</div>
+            <p class="texto-dialogo">¡Un gusto <span id="nombre-mostrado">……….</span>! Yo soy Phoebe.<br>Pasa, las demás miembros ya están dentro.</p>
+            <div class="opciones">
+                <a href="sala-01.html" class="boton">Entrar a la sala →</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            const params = new URLSearchParams(window.location.search);
+            let nombre = (params.get("nombre") || "").trim();
+            if (!nombre) {
+                try {
+                    nombre = (localStorage.getItem("nombreJugador") || "").trim();
+                } catch (e) {}
+            }
+            if (nombre) {
+                document.getElementById("nombre-mostrado").textContent = nombre;
+            }
+        })();
+    </script>
+
+</body>
+</html>

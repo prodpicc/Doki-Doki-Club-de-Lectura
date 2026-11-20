@@ -1,4 +1,4 @@
-/* Importamos una fuente redondeada estilo novela visual */
+/* Fuente redondeada estilo novela visual */
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap');
 
 * {
@@ -17,7 +17,6 @@ body {
     color: #4a3b42;
 }
 
-/* Marco contenedor en index.html para mantener la música continua sin JavaScript */
 body.marco-principal {
     margin: 0;
     padding: 0;
@@ -32,7 +31,6 @@ body.marco-principal {
     display: block;
 }
 
-/* Contenedor principal tipo pantalla de juego (16:9) */
 .pantalla-juego {
     width: 960px;
     height: 600px;
@@ -44,7 +42,6 @@ body.marco-principal {
     background-color: #ffeef5;
 }
 
-/* --- IMÁGENES DE FONDO LOCALES --- */
 .fondo-img {
     position: absolute;
     top: 0;
@@ -55,7 +52,7 @@ body.marco-principal {
     z-index: 0;
 }
 
-/* --- PUERTAS (CERRADA Y ABIERTA) --- */
+/* --- PUERTAS --- */
 .puerta-img {
     position: absolute;
     top: 42px;
@@ -79,7 +76,7 @@ body.marco-principal {
     cursor: pointer;
 }
 
-/* --- PERSONAJES / SPRITES --- */
+/* --- PERSONAJES --- */
 .personaje {
     position: absolute;
     bottom: 130px;
@@ -105,7 +102,11 @@ body.marco-principal {
     left: 72%;
 }
 
-/* --- CAJA DE DIÁLOGO ESTILO DOKI DOKI LITERATURE CLUB --- */
+.personaje-centro {
+    left: 50%;
+}
+
+/* --- CAJA DE DIÁLOGO --- */
 .caja-dialogo {
     position: absolute;
     bottom: 20px;
@@ -141,7 +142,6 @@ body.marco-principal {
     margin-bottom: 15px;
 }
 
-/* Botones de opciones y navegación */
 .opciones {
     display: flex;
     gap: 12px;
@@ -169,7 +169,6 @@ body.marco-principal {
     transform: scale(1.03);
 }
 
-/* Caja de texto para escribir */
 .input-nombre {
     padding: 8px 12px;
     border: 2px solid #ff85b3;
@@ -180,16 +179,31 @@ body.marco-principal {
     width: 260px;
 }
 
-/* --- MAGIA CSS PURA PARA DETECTAR "Monika" SIN JAVASCRIPT --- */
-.btn-secreto {
+/* Detección CSS pura para Monika y Alessa */
+.btn-monika,
+.btn-alessa {
     display: none;
 }
 
+.opciones:has(.input-secreto[value=""]) .btn-normal {
+    display: inline-block;
+}
+
+/* Truco CSS puro con inputs invisibles o validación de patrón para Monika y Alessa */
+.form-secreto {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+/* Usamos :has con pattern en input-monika */
 .opciones:has(.input-secreto:valid) .btn-normal {
     display: none;
 }
 
-.opciones:has(.input-secreto:valid) .btn-secreto {
+.opciones:has(.input-secreto:valid) .btn-monika {
     display: inline-block;
 }
 
@@ -232,13 +246,12 @@ body.marco-principal {
 
 /* --- PANTALLA DE LECTURA DEL POEMA (LIBRO ABIERTO SIN CUADRO BLANCO) --- */
 .pantalla-lectura {
-    background-color: #3d2c24; /* Mesa oscura detrás del libro */
+    background-color: #3d2c24;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/* Contenedor que mantiene la proporción exacta (2048x1591) de libro-abierto.png más chica */
 .libro-escena {
     position: relative;
     width: 720px;
@@ -260,7 +273,6 @@ body.marco-principal {
     filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.65));
 }
 
-/* Dos columnas transparentes apoyadas directamente sobre las hojas izquierda y derecha del libro */
 .paginas-libro {
     position: relative;
     z-index: 2;
@@ -298,7 +310,6 @@ body.marco-principal {
     color: #2c221d;
 }
 
-/* El código Base64 con mancha de café directamente sobre la hoja derecha */
 .codigo-oculto {
     display: inline-block;
     margin-top: 10px;
@@ -340,7 +351,7 @@ body.marco-principal {
     display: inline-block;
 }
 
-/* --- CRÉDITOS ESTILO DOKI DOKI LITERATURE CLUB --- */
+/* --- CRÉDITOS --- */
 .pantalla-creditos {
     background-color: #0d0d0d;
     border-color: #ffb7d5;
@@ -368,12 +379,8 @@ body.marco-principal {
 }
 
 @keyframes subirCreditos {
-    0% {
-        top: 100%;
-    }
-    100% {
-        top: 40px;
-    }
+    0% { top: 100%; }
+    100% { top: 40px; }
 }
 
 .titulo-creditos {
@@ -405,7 +412,6 @@ body.marco-principal {
     text-shadow: 0 0 6px rgba(255, 183, 213, 0.6);
 }
 
-/* Barra discreta de control de audio arriba por si el navegador bloquea autoplay */
 .control-musica {
     position: fixed;
     top: 10px;

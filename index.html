@@ -7,15 +7,43 @@
 </head>
 <body class="marco-principal">
 
-    <!-- Música de fondo continua para todos los nodos -->
-    <div class="control-musica">
-        <audio autoplay loop controls>
-            <source src="audio/musica-fondo.mp3" type="audio/mpeg">
-        </audio>
-    </div>
+    <audio id="musica-fondo" autoplay loop preload="auto">
+        <source src="audio/musica-fondo.mp3" type="audio/mpeg">
+    </audio>
 
-    <!-- Aquí se cargan todos los nodos sin interrumpir la música -->
-    <iframe src="inicio.html" name="pantalla" class="visor-juego"></iframe>
+    <iframe id="visor-juego" src="inicio.html" name="pantalla" class="visor-juego"></iframe>
+
+    <script>
+        (function () {
+            const audio = document.getElementById("musica-fondo");
+            const iframe = document.getElementById("visor-juego");
+
+            function iniciarMusica() {
+                if (audio && audio.paused) {
+                    audio.play().catch(function () {});
+                }
+            }
+
+            // Intentar reproducir apenas carga la página
+            window.addEventListener("DOMContentLoaded", iniciarMusica);
+            window.addEventListener("load", iniciarMusica);
+
+            // Desbloquear automáticamente ante cualquier interacción en el documento principal o dentro del iframe
+            ["click", "pointerdown", "keydown", "touchstart"].forEach(function (evt) {
+                document.addEventListener(evt, iniciarMusica);
+            });
+
+            iframe.addEventListener("load", function () {
+                iniciarMusica();
+                try {
+                    const docIframe = iframe.contentDocument || iframe.contentWindow.document;
+                    ["click", "pointerdown", "keydown", "touchstart"].forEach(function (evt) {
+                        docIframe.addEventListener(evt, iniciarMusica);
+                    });
+                } catch (e) {}
+            });
+        })();
+    </script>
 
 </body>
 </html>

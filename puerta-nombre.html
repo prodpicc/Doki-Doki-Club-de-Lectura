@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Club de Lectura</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+    <div class="pantalla-juego">
+        <img src="img/pasillo.jpg" alt="Pasillo frente a la sala de lectura" class="fondo-img">
+        <img src="img/puerta-cerrada.png" alt="Puerta cerrada" class="puerta-img">
+        <img src="img/phoebe.png" alt="Phoebe" class="personaje personaje-puerta">
+
+        <div class="caja-dialogo">
+            <div class="nombre-personaje">Phoebe</div>
+            <p class="texto-dialogo">¡Bienvenida! ¿Cómo te llamás?</p>
+            <form action="puerta-pasa.html" method="get" class="opciones" id="form-nombre">
+                <input type="text" id="input-nombre-jugador" name="nombre" class="input-nombre" placeholder="……….">
+                <button type="submit" class="boton">Continuar →</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            const form = document.getElementById("form-nombre");
+            const input = document.getElementById("input-nombre-jugador");
+            form.addEventListener("submit", function () {
+                const valor = input.value.trim();
+                try {
+                    localStorage.setItem("nombreJugador", valor);
+                } catch (e) {}
+            });
+        })();
+    </script>
+
+</body>
+</html>
